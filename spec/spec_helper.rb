@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "ares_cz"
+require "ares_rest"
 require "webmock/rspec"
 
 RSpec.configure do |config|

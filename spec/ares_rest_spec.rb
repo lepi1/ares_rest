@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe AresCz do
-  let(:endpoint) { "#{AresCz::BASE_URL}/ekonomicke-subjekty" }
+RSpec.describe AresRest do
+  let(:endpoint) { "#{AresRest::BASE_URL}/ekonomicke-subjekty" }
 
   let(:company_body) do
     {
@@ -22,7 +22,7 @@ RSpec.describe AresCz do
   end
 
   it "has a version number" do
-    expect(AresCz::VERSION).not_to be_nil
+    expect(AresRest::VERSION).not_to be_nil
   end
 
   describe ".find" do
@@ -53,18 +53,18 @@ RSpec.describe AresCz do
     it "raises NotFoundError when ARES returns 404" do
       stub_request(:get, "#{endpoint}/12345678").to_return(status: 404, body: "{}")
 
-      expect { described_class.find("12345678") }.to raise_error(AresCz::NotFoundError)
+      expect { described_class.find("12345678") }.to raise_error(AresRest::NotFoundError)
     end
 
     it "raises InvalidIcoError when ARES returns 400" do
       stub_request(:get, "#{endpoint}/12345678").to_return(status: 400, body: "{}")
 
-      expect { described_class.find("12345678") }.to raise_error(AresCz::InvalidIcoError)
+      expect { described_class.find("12345678") }.to raise_error(AresRest::InvalidIcoError)
     end
 
     it "raises InvalidIcoError without calling ARES for malformed input" do
       ["abc", "123456789", "", "1/../x", nil].each do |ico|
-        expect { described_class.find(ico) }.to raise_error(AresCz::InvalidIcoError)
+        expect { described_class.find(ico) }.to raise_error(AresRest::InvalidIcoError)
       end
       expect(a_request(:any, /ares/)).not_to have_been_made
     end
@@ -72,23 +72,23 @@ RSpec.describe AresCz do
     it "raises Error on unexpected HTTP status" do
       stub_request(:get, "#{endpoint}/12345678").to_return(status: 500)
 
-      expect { described_class.find("12345678") }.to raise_error(AresCz::Error, /HTTP 500/)
+      expect { described_class.find("12345678") }.to raise_error(AresRest::Error, /HTTP 500/)
     end
 
     it "wraps network errors in Error" do
       stub_request(:get, "#{endpoint}/12345678").to_timeout
 
-      expect { described_class.find("12345678") }.to raise_error(AresCz::Error, /Communication error/)
+      expect { described_class.find("12345678") }.to raise_error(AresRest::Error, /Communication error/)
     end
 
     it "wraps invalid JSON in Error" do
       stub_request(:get, "#{endpoint}/12345678").to_return(status: 200, body: "<html>")
 
-      expect { described_class.find("12345678") }.to raise_error(AresCz::Error, /Invalid ARES response/)
+      expect { described_class.find("12345678") }.to raise_error(AresRest::Error, /Invalid ARES response/)
     end
   end
 
-  describe AresCz::Company do
+  describe AresRest::Company do
     def build(sidlo)
       described_class.new("ico" => "1", "sidlo" => sidlo)
     end

@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require_relative "lib/ares_cz/version"
+require_relative "lib/ares_rest/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "ares_cz"
-  spec.version = AresCz::VERSION
+  spec.name = "ares_rest"
+  spec.version = AresRest::VERSION
   spec.authors = ["lepi1"]
   spec.email = ["public@tomaslepic.cz"]
 
   spec.summary = "Ruby client for the Czech ARES business registry API"
   spec.description = "Look up Czech companies by ICO (IČO) using the official ARES REST API."
-  spec.homepage = "https://github.com/lepi1/ares_cz"
+  spec.homepage = "https://github.com/lepi1/ares_rest"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.2.0"
   spec.metadata["allowed_push_host"] = "https://rubygems.org"

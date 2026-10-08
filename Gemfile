@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in ares_cz.gemspec
+# Specify your gem's dependencies in ares_rest.gemspec
 gemspec
 
 gem "irb"

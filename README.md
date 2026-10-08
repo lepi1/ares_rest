@@ -1,24 +1,24 @@
-# AresCz
+# AresRest
 
 Simple Ruby client for the Czech [ARES](https://ares.gov.cz/) registry. Finds a company by IČO.
 
 ## Installation
 
 ```ruby
-gem "ares_cz", github: "lepi1/ares_cz"
+gem "ares_rest", github: "lepi1/ares_rest"
 ```
 
 ## Usage
 
 ```ruby
-company = AresCz.find("12345678")
+company = AresRest.find("12345678")
 company.name   # => "Example s.r.o."
 company.street # => "Hlavní 123/4"
 ```
 
 Other attributes: `ico`, `dic`, `city`, `zip`, `address`. There is also `to_h`.
 
-Raises `AresCz::NotFoundError` when the IČO doesn't exist, `AresCz::InvalidIcoError` for a malformed IČO and `AresCz::Error` for anything else (network errors, timeouts). All of them inherit from `AresCz::Error`.
+Raises `AresRest::NotFoundError` when the IČO doesn't exist, `AresRest::InvalidIcoError` for a malformed IČO and `AresRest::Error` for anything else (network errors, timeouts). All of them inherit from `AresRest::Error`.
 
 ## Development
 
@@ -26,7 +26,7 @@ Run `bin/setup` to install dependencies, then `bundle exec rake` to run tests an
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/lepi1/ares_cz. Contributors are expected to follow the [code of conduct](https://github.com/lepi1/ares_cz/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/lepi1/ares_rest. Contributors are expected to follow the [code of conduct](https://github.com/lepi1/ares_rest/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 

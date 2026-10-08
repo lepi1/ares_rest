@@ -4,11 +4,11 @@ require "json"
 require "net/http"
 require "openssl"
 require "uri"
-require_relative "ares_cz/version"
+require_relative "ares_rest/version"
 
 # Module for calling Ares API
 # https://ares.gov.cz/swagger-ui/#/
-module AresCz
+module AresRest
   class Error < StandardError; end
   class NotFoundError < Error; end
   class InvalidIcoError < Error; end
