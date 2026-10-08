@@ -8,9 +8,19 @@ Simple Ruby client for the Czech [ARES](https://ares.gov.cz/) registry. Finds a 
 
 ## Installation
 
+Add to your Gemfile:
+
 ```ruby
-gem "ares_rest", github: "lepi1/ares_rest"
+gem "ares_rest"
 ```
+
+or without Bundler:
+
+```bash
+gem install ares_rest
+```
+
+Requires Ruby 3.2 or newer.
 
 ## Usage
 
