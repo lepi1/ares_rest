@@ -1,5 +1,9 @@
 # AresRest
 
+[![Gem Version](https://img.shields.io/gem/v/ares_rest)](https://rubygems.org/gems/ares_rest)
+[![CI](https://github.com/lepi1/ares_rest/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/lepi1/ares_rest/actions/workflows/main.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt)
+
 Simple Ruby client for the Czech [ARES](https://ares.gov.cz/) registry. Finds a company by IČO.
 
 ## Installation
