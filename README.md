@@ -16,7 +16,13 @@ company.name   # => "Example s.r.o."
 company.street # => "Hlavní 123/4"
 ```
 
-Other attributes: `ico`, `dic`, `city`, `zip`, `address`. There is also `to_h`.
+Returns an `AresRest::Subject`. Other attributes: `ico`, `dic`, `city`, `zip`, `address`. There is also `to_h`.
+
+For fields not mapped yet, use the raw ARES response:
+
+```ruby
+company.data["datumVzniku"] # => "2020-01-01"
+```
 
 Raises `AresRest::NotFoundError` when the IČO doesn't exist, `AresRest::InvalidIcoError` for a malformed IČO and `AresRest::Error` for anything else (network errors, timeouts). All of them inherit from `AresRest::Error`.
 

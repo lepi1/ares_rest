@@ -4,5 +4,5 @@
 
 - Initial release
 - Add `AresRest.find` to look up a company by IČO
-- Add `AresRest::Company` with name, DIČ and registered address
+- Add `AresRest::Subject` with name, DIČ, registered address and the raw response via `data`
 - Add `NotFoundError` and `InvalidIcoError`; network and parsing failures raise `AresRest::Error`

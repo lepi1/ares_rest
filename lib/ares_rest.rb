@@ -20,11 +20,13 @@ module AresRest
     SocketError, Timeout::Error, IOError, SystemCallError, OpenSSL::SSL::SSLError
   ].freeze
 
-  # Object for company info
-  class Company
-    attr_reader :ico, :name, :dic, :street, :city, :zip, :address
+  # Economic subject (company, sole trader, association, ...) returned by ARES.
+  # The full parsed response is available via #data.
+  class Subject
+    attr_reader :ico, :name, :dic, :street, :city, :zip, :address, :data
 
     def initialize(data)
+      @data = data
       @ico = data["ico"]
       @name = data["obchodniJmeno"]
       @dic = data["dic"]
@@ -56,7 +58,7 @@ module AresRest
     response = get(URI(format(BY_ICO_ENDPOINT, normalize_ico(ico))))
 
     case response.code
-    when "200" then Company.new(JSON.parse(response.body))
+    when "200" then Subject.new(JSON.parse(response.body))
     when "404" then raise NotFoundError, "Cannot find subject with ICO #{ico}"
     when "400" then raise InvalidIcoError, "ARES rejected ICO #{ico}"
     else raise Error, "Unexpected ARES response: HTTP #{response.code}"

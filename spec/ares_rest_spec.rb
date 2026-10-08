@@ -88,7 +88,7 @@ RSpec.describe AresRest do
     end
   end
 
-  describe AresRest::Company do
+  describe AresRest::Subject do
     def build(sidlo)
       described_class.new("ico" => "1", "sidlo" => sidlo)
     end
@@ -103,6 +103,12 @@ RSpec.describe AresRest do
       company = build("nazevObce" => "Brno", "nazevUlice" => "Hlavní", "cisloDomovni" => 5)
 
       expect(company.street).to eq("Hlavní 5")
+    end
+
+    it "exposes the raw ARES response" do
+      result = described_class.new("ico" => "1", "datumVzniku" => "2020-01-01")
+
+      expect(result.data["datumVzniku"]).to eq("2020-01-01")
     end
 
     it "leaves address fields nil without a seat" do
