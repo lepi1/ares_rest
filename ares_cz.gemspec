@@ -6,17 +6,18 @@ Gem::Specification.new do |spec|
   spec.name = "ares_cz"
   spec.version = AresCz::VERSION
   spec.authors = ["lepi1"]
-  spec.email = ["tomaslepicg@gmail.com"]
+  spec.email = ["public@tomaslepic.cz"]
 
-  spec.summary = "TODO: Write a short summary, because RubyGems requires one."
-  spec.description = "TODO: Write a longer description or delete this line."
-  spec.homepage = "TODO: Put your gem's website or public repo URL here."
+  spec.summary = "Ruby client for the Czech ARES business registry API"
+  spec.description = "Look up Czech companies by ICO (IČO) using the official ARES REST API."
+  spec.homepage = "https://github.com/lepi1/ares_cz"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.2.0"
-  spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
+  spec.metadata["allowed_push_host"] = "https://rubygems.org"
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
-  spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
+  spec.metadata["source_code_uri"] = spec.homepage
+  spec.metadata["changelog_uri"] = "#{spec.homepage}/blob/main/CHANGELOG.md"
+  spec.metadata["rubygems_mfa_required"] = "true"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
