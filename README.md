@@ -32,7 +32,7 @@ Run `bin/setup` to install dependencies, then `bundle exec rake` to run tests an
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/lepi1/ares_rest. Contributors are expected to follow the [code of conduct](https://github.com/lepi1/ares_rest/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/lepi1/ares_rest. Contributors are expected to follow the [code of conduct](https://github.com/lepi1/ares_rest/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 

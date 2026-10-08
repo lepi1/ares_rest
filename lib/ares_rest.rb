@@ -30,6 +30,7 @@ module AresRest
   NETWORK_ERRORS = [
     SocketError, Timeout::Error, IOError, SystemCallError, OpenSSL::SSL::SSLError
   ].freeze
+  private_constant :BASE_URL, :BY_ICO_ENDPOINT, :OPEN_TIMEOUT, :READ_TIMEOUT, :NETWORK_ERRORS
 
   # Economic subject (company, sole trader, association, ...) returned by ARES.
   # The full parsed response is available via {#data}.

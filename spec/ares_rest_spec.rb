@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe AresRest do
-  let(:endpoint) { "#{AresRest::BASE_URL}/ekonomicke-subjekty" }
+  let(:endpoint) { "https://ares.gov.cz/ekonomicke-subjekty-v-be/rest/ekonomicke-subjekty" }
 
   let(:company_body) do
     {
