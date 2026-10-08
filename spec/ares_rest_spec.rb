@@ -111,6 +111,12 @@ RSpec.describe AresRest do
       expect(result.data["datumVzniku"]).to eq("2020-01-01")
     end
 
+    it "inspects without the raw response" do
+      result = described_class.new("ico" => "12345678", "obchodniJmeno" => "Example s.r.o.", "sidlo" => {})
+
+      expect(result.inspect).to eq('#<AresRest::Subject ico="12345678" name="Example s.r.o.">')
+    end
+
     it "leaves address fields nil without a seat" do
       company = described_class.new("ico" => "1", "obchodniJmeno" => "X")
 

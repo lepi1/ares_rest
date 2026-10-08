@@ -79,6 +79,15 @@ module AresRest
       { ico: ico, name: name, dic: dic, street: street, city: city, postal_code: postal_code, address: address }
     end
 
+    # Short representation without the raw {#data}.
+    #
+    # @example
+    #   subject.inspect # => '#<AresRest::Subject ico="12345678" name="Example s.r.o.">'
+    # @return [String]
+    def inspect
+      "#<#{self.class} ico=#{ico.inspect} name=#{name.inspect}>"
+    end
+
     private
 
     def assign_address(location)
