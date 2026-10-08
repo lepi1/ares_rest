@@ -8,10 +8,21 @@ require_relative "ares_rest/version"
 
 # Module for calling Ares API
 # https://ares.gov.cz/swagger-ui/#/
+#
+# @example
+#   subject = AresRest.find("12345678")
+#   subject.name   # => "Example s.r.o."
+#   subject.street # => "Hlavní 123/4"
 module AresRest
+  # Base class for all errors raised by this gem.
   class Error < StandardError; end
+
+  # Raised when ARES has no subject with the given IČO.
   class NotFoundError < Error; end
+
+  # Raised when the IČO is malformed or ARES rejects it.
   class InvalidIcoError < Error; end
+
   BASE_URL = "https://ares.gov.cz/ekonomicke-subjekty-v-be/rest"
   BY_ICO_ENDPOINT = "#{BASE_URL}/ekonomicke-subjekty/%s".freeze
   OPEN_TIMEOUT = 5
@@ -21,10 +32,37 @@ module AresRest
   ].freeze
 
   # Economic subject (company, sole trader, association, ...) returned by ARES.
-  # The full parsed response is available via #data.
+  # The full parsed response is available via {#data}.
   class Subject
-    attr_reader :ico, :name, :dic, :street, :city, :zip, :address, :data
+    # @return [String, nil] IČO, 8 digits
+    attr_reader :ico
 
+    # @return [String, nil] business name (obchodní jméno)
+    attr_reader :name
+
+    # @return [String, nil] VAT number (DIČ), e.g. "CZ12345678"
+    attr_reader :dic
+
+    # @return [String, nil] street with house number, e.g. "Hlavní 123/4a"
+    attr_reader :street
+
+    # @return [String, nil] municipality
+    attr_reader :city
+
+    # @return [String, nil] postal code without spaces, e.g. "11000"
+    attr_reader :zip
+
+    # @return [String, nil] full one-line address as formatted by ARES
+    attr_reader :address
+
+    # Raw parsed ARES response, for fields without their own accessor.
+    #
+    # @example
+    #   subject.data["datumVzniku"] # => "2020-01-01"
+    # @return [Hash{String => Object}]
+    attr_reader :data
+
+    # @param data [Hash{String => Object}] parsed ARES response
     def initialize(data)
       @data = data
       @ico = data["ico"]
@@ -33,6 +71,7 @@ module AresRest
       assign_address(data["sidlo"]) if data["sidlo"]
     end
 
+    # @return [Hash{Symbol => String, nil}] mapped attributes, without {#data}
     def to_h
       { ico: ico, name: name, dic: dic, street: street, city: city, zip: zip, address: address }
     end
@@ -54,6 +93,16 @@ module AresRest
     end
   end
 
+  # Looks up an economic subject by IČO.
+  #
+  # @param ico [String, Integer] 1-8 digits; whitespace is stripped and
+  #   shorter numbers are padded with leading zeros
+  # @return [Subject]
+  # @raise [InvalidIcoError] if the IČO is malformed
+  # @raise [NotFoundError] if no subject has this IČO
+  # @raise [Error] on network failure, timeout or an unexpected response
+  # @example
+  #   AresRest.find("12345678").name # => "Example s.r.o."
   def self.find(ico)
     response = get(URI(format(BY_ICO_ENDPOINT, normalize_ico(ico))))
 

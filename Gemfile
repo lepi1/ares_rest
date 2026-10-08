@@ -12,4 +12,6 @@ gem "rspec", "~> 3.0"
 
 gem "rubocop", "~> 1.21"
 
+gem "yard", "~> 0.9", group: :development
+
 gem "webmock", "~> 3.26", group: :test
