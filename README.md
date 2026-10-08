@@ -16,7 +16,7 @@ company.name   # => "Example s.r.o."
 company.street # => "Hlavní 123/4"
 ```
 
-Returns an `AresRest::Subject`. Other attributes: `ico`, `dic`, `city`, `zip`, `address`. There is also `to_h`.
+Returns an `AresRest::Subject`. Other attributes: `ico`, `dic`, `city`, `postal_code`, `address`. There is also `to_h`.
 
 For fields not mapped yet, use the raw ARES response:
 

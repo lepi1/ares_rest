@@ -37,7 +37,7 @@ RSpec.describe AresRest do
         dic: "CZ12345678",
         street: "Hlavní 123/4a",
         city: "Praha",
-        zip: "11000",
+        postal_code: "11000",
         address: "Hlavní 123/4a, Nové Město, 11000 Praha 1"
       )
     end
@@ -114,7 +114,7 @@ RSpec.describe AresRest do
     it "leaves address fields nil without a seat" do
       company = described_class.new("ico" => "1", "obchodniJmeno" => "X")
 
-      expect([company.street, company.city, company.zip]).to all(be_nil)
+      expect([company.street, company.city, company.postal_code]).to all(be_nil)
     end
   end
 end

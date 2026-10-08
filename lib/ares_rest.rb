@@ -47,11 +47,12 @@ module AresRest
     # @return [String, nil] street with house number, e.g. "Hlavní 123/4a"
     attr_reader :street
 
-    # @return [String, nil] municipality
+    # @return [String, nil] municipality (název obce), without district,
+    #   e.g. "Praha" even for an address in Praha 4
     attr_reader :city
 
-    # @return [String, nil] postal code without spaces, e.g. "11000"
-    attr_reader :zip
+    # @return [String, nil] postal code (PSČ) without spaces, e.g. "11000"
+    attr_reader :postal_code
 
     # @return [String, nil] full one-line address as formatted by ARES
     attr_reader :address
@@ -63,6 +64,7 @@ module AresRest
     # @return [Hash{String => Object}]
     attr_reader :data
 
+    # @api private
     # @param data [Hash{String => Object}] parsed ARES response
     def initialize(data)
       @data = data
@@ -74,7 +76,7 @@ module AresRest
 
     # @return [Hash{Symbol => String, nil}] mapped attributes, without {#data}
     def to_h
-      { ico: ico, name: name, dic: dic, street: street, city: city, zip: zip, address: address }
+      { ico: ico, name: name, dic: dic, street: street, city: city, postal_code: postal_code, address: address }
     end
 
     private
@@ -84,7 +86,7 @@ module AresRest
 
       @street = "#{street} #{build_street_number_from(location)}".strip
       @city = location["nazevObce"]
-      @zip = location["psc"]&.to_s&.gsub(/\s+/, "")
+      @postal_code = location["psc"]&.to_s&.gsub(/\s+/, "")
       @address = location["textovaAdresa"]
     end
 
